@@ -23,4 +23,10 @@
         <field name="Username" key="loginUsernameKey" type="String" mapToProperty="Username">
         </field>
     </group>
+    <group name="LoginInnerGroup" key="innerGroupKey" mapToObject="Login$LoginForm">
+      <field name="Username" key="logininnerUsernameKey" type="String" mapToProperty="Username">
+      </field>
+      <field name="Password" key="logininnerPasswordKey" type="String" mapToProperty="Password">
+      </field>      
+  </group>    
 </input-data>

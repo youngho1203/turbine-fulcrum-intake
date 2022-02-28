@@ -95,6 +95,11 @@ public class IntakeServiceTest extends BaseUnit5Test
         assertNotNull(group2);
         assertEquals("anotherGroupKey", group2.getGID());
         assertEquals("AnotherGroup", group2.getIntakeGroupName());
+
+        Group group3 = intakeService.getGroup("LoginInnerGroup");
+        assertNotNull(group3);
+        assertEquals("innerGroupKey", group3.getGID());
+        assertEquals("LoginInnerGroup", group3.getIntakeGroupName());        
     }
 
 }

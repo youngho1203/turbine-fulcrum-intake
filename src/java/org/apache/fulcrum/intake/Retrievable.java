@@ -27,6 +27,9 @@ package org.apache.fulcrum.intake;
  */
 public interface Retrievable
 {
+    /** Constant for default query key for non saved object */
+    String DEFAULT_KEY = "_0";
+
     /**
      * get an id that differentiates this object from others
      * of its class.

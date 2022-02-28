@@ -32,6 +32,7 @@ import java.util.Locale;
 
 import org.apache.fulcrum.intake.model.Field;
 import org.apache.fulcrum.intake.model.Group;
+import org.apache.fulcrum.intake.test.Login;
 import org.apache.fulcrum.intake.test.LoginForm;
 import org.apache.fulcrum.intake.validator.BigDecimalValidator;
 import org.apache.fulcrum.intake.validator.BooleanValidator;
@@ -126,7 +127,35 @@ public class IntakeTest extends BaseUnit5Test
 
         assertEquals("Joe", form.getUsername(), "User names should be equal");
     }
+    /**
+     * @throws Exception generic exception
+     */
+    @Test
+    public void testInnerClassMapTo() throws Exception
+    {
+        IntakeService is = (IntakeService) this.lookup( IntakeService.ROLE );
+        Group group = is.getGroup("LoginInnerGroup");
+        assertNotNull(group);
 
+        Field<?> userNameField = group.get("Username");
+        Field<?> passwordField = group.get("Password");
+
+        ParserService ps = (ParserService) this.lookup( ParserService.ROLE );
+        ValueParser pp = ps.getParser(DefaultParameterParser.class);
+
+        pp.setString(userNameField.getKey(), "Joe");
+        pp.setString(passwordField.getKey(), "Joe1234");
+        userNameField.init(pp);
+        userNameField.validate();
+        passwordField.init(pp);
+        passwordField.validate();        
+
+        Login.LoginForm form = new Login.LoginForm();
+        group.setProperties(form);
+
+        assertEquals("Joe", form.getUsername(), "User names should be equal");
+        assertEquals("Joe1234", form.getPassword(), "Password should be equal");
+    }
     /**
      * @throws Exception generic exception
      */
